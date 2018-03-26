@@ -1,0 +1,6 @@
+[1] 安装Perl.
+[root@linuxprobe ~]# yum -y install perl perl-CGI
+#查看版本
+httpd -version
+#启动http服务器，
+service httpd start
