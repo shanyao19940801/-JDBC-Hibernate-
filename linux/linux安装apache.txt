@@ -4,3 +4,6 @@
 httpd -version
 #启动http服务器，
 service httpd start
+
+service httpd stop  关闭
+service httpd restart 重新启动

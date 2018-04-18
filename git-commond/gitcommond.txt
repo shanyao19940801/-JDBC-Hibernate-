@@ -1,0 +1,13 @@
+#本地所有修改的。没有的提交的，都返回到原来的状态
+git checkout . 
+#把所有没有提交的修改暂存到stash里面。可用git stash <a href="https://www.baidu.com/s?wd=pop&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrAR1nvmLmycdnvN9njn10ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnH0YP1f1n1nznjnYnHDvPWDLrf" target="_blank" class="baidu-highlight">pop</a>回复。
+git stash 
+ #返回到某个节点，不保留修改。
+git reset --hard HASH
+#返回到某个节点。保留修改
+git reset --soft HASH
+
+#从远程下载最新的内容，而不尝试合并或者转换任何内容。
+git fetch --all
+#然后 git reset 将主分支重置为你刚刚获取的内容。 --hard 选项将更改工作树中的所有文件以匹配 origin/master 中的文件
+git reset --hard origin/master
