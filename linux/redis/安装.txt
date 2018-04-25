@@ -1,0 +1,51 @@
+#下载Redis 
+wget http://download.redis.io/releases/redis-4.0.2.tar.gz
+# 解压 
+tar -zxvf redis-4.0.2.tar.gz
+# 编译安装Redis 
+# 切换至程序目录，并执行make命令编译
+cd redis-4.0.2
+make
+# 执行安装命令
+make install
+
+# make install安装完成后，会在/usr/local/bin目录下生成下面几个可执行文件，它们的作用分别是：
+
+redis-server：Redis服务器端启动程序 
+redis-cli：Redis客户端操作工具。也可以用telnet根据其纯文本协议来操作 
+redis-benchmark：Redis性能测试工具 
+redis-check-aof：数据修复工具 
+redis-check-dump：检查导出工具
+
+# 启动服务区
+
+src/redis-server &      启动redis，加上&表示使redis以后台程序方式运行
+redis-server /usr/local/kencery/redis/redis.conf  启动redis
+src/redis-cli shutdown     关闭redis
+当redis启动完成之后，使用netstat -ntlp |grep 6379  查看端口是否在使用中，
+# 设置开机启动
+# 配置环境，把配置文件以端口为名复制一份到指定目录（需要使用root用户）# 
+mkdir /etc/redis
+cp redis.conf /etc/redis/6379.conf
+
+# 将启动脚本复制到/etc/init.d目录下，本例将启动脚本命名为redisd（通常都以d结尾表示是后台自启动服务）
+redis_init_script（该脚本目录redis/utils）
+cp redis_init_script /etc/init.d/redisd
+脚本中添加下面几行代码，不然会显示不支持
+# chkconfig:   2345 90 10
+# description:  Redis is a persistent key-value database
+
+# 设置为开机自启动
+chkconfig redisd on 
+//启动redis
+service redisd start
+//关闭redis
+service redisd stop
+
+# 设置密码
+1.redis-cli 客户端
+	
+2.config get requirepass
+3.config set requirepass ****(****为你要设置的密码)，设置成功的话会返回‘OK’字样
+用密码登录
+4.redis-cli -h 127.0.0.1 -p 6379 -a shanyao
