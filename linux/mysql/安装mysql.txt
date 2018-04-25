@@ -1,0 +1,26 @@
+就 wget http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+ #解压
+yum localinstall mysql57-community-release-el7-11.noarch.rpm
+#安装mysql服务器
+yum install mysql-community-server
+#启动服务器
+systemctl start mysqld
+#查看MySQL的启动状态
+systemctl status mysqld
+#开机启动
+systemctl enable mysqld
+systemctl daemon-reload
+
+#允许远程连接
+GRANT ALL PRIVILEGES ON *.* TO 'shanyao'@'%' IDENTIFIED BY 'shanyao' WITH GRANT OPTION;
+grant all privileges on *.* to root@'%'identified by 'shanyao';
+
+#显示密码策略
+SHOW VARIABLES LIKE 'validate_password%';
+
+#查看mysql安装位置
+whereis mysql
+
+#启动mysql服务器
+ systemctl start mysqld
+ 

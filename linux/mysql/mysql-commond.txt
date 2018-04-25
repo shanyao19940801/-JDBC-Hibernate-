@@ -1,0 +1,11 @@
+#查看临时密码（如果看不到就把文件下载下来看或者）
+grep 'temporary password' /var/log/mysqld.log
+#修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'shanyao';
+#一般会报错说密码太简单，修改密码策略
+set global validate_password_policy=0; 
+set global validate_password_length=1;
+
+授权其他机器登陆
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+FLUSH  PRIVILEGES;
