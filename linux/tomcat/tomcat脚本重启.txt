@@ -1,0 +1,46 @@
+#!/bin/sh
+#tomcat目录 
+P='/sirm/apache-tomcat'			
+tomcatpath=${p}'/bin'
+echo 'operate restart tomcat: '$tomcatpath
+pid = `ps aux | grep $tomcatpath | grep -v grep | grep -v retomcat | awk '{print $2}'`
+echo 'exist pid:'$pid
+
+if [-n "$pid"]
+then 
+{
+	echo =====kill tomcat begin=====
+	echo $pid
+	kill -9 $pid
+	echo =====kill tomcat end=======
+	fi
+	sleep 2
+	echo ======startup.sh========
+	$tomcatpath'/startup.sh'
+}
+else
+echo =========startup.sh==============
+$tomcatpath'/startup.sh'
+
+
+
+ 启动服务：
+./tomcat.sh start
+停止服务：
+./tomcat.sh stop
+注意：
+1、编写脚本里的tomcat的路径是你自己的tomcat的路径
+
+2、第一次运行脚本的时候可能会出现报错
+
+
+
+那么就要给脚本设置权限
+
+chmod 777 ./tomcat.sh 
+然后运行就可以了 
+
+
+#原文地址
+==https://blog.csdn.net/sjzylc/article/details/45030265
+

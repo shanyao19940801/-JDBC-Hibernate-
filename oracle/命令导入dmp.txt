@@ -1,0 +1,4 @@
+用户名：sfm_new_crs   密码 ：sfm_new_crs
+表空间：NEW_SFM_CRS
+
+imp sfm_new_crs/sfm_new_crs@orcl file=C:\Users\admin\Desktop\鑫元脚本\20182519\2-sfm_crs_20180519.dmp fromuser=SFM_CRS_USER touser=sfm_new_crs log=C:\Users\admin\Desktop\鑫元脚本\20182519\sfm_new_crs20180513.log ignore=y rows=y
