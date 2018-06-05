@@ -1,0 +1,9 @@
+# 下载
+wget https://netix.dl.sourceforge.net/project/pcre/pcre/8.42/pcre-8.42.tar.gz
+# 解压
+tar -zxvf   pcre-8.42.tar.gz
+# 编译： 
+
+cd pcre-8.42
+
+make
