@@ -1,3 +1,5 @@
+https://www.linuxidc.com/Linux/2016-09/134907.htm
+
 # 下载安装包
 wget -c https://nginx.org/download/nginx-1.14.0.tar.gz
 # 解压

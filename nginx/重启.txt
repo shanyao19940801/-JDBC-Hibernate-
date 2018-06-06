@@ -1,0 +1,5 @@
+在nginx的早期版本，nginx重启需要通过kill命令向nginx发送信号来实现nginx的重启。
+但是，现在，nginx增加了-s选项，实现nginx的停止，重新加载功能。
+1. 如果是平滑的重启nginx，可以用./nginx -s reload命令实现nginx的平滑重启。
+2. 如果是非平滑重启，则可以先停止nginx，然后再启动：
+./nginx -s stop && ./nginx
