@@ -1,5 +1,5 @@
 #!/bin/bash
-tomcat_home='/home/tomcat/apache-tomcat-8.5.8'
+tomcat_home='/home/tomcat/apache-tomcat-8082'
 tomcatpath=${tomcat_home}'/bin'
 SHUTDOWN=$tomcat_home/bin/shutdown.sh
 STARTTOMCAT=$tomcat_home/bin/startup.sh
