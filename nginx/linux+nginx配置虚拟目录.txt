@@ -1,1 +1,183 @@
-https://blog.csdn.net/whatday/article/details/50649461
+参考地址：https://blog.csdn.net/whatday/article/details/50649461
+
+
+今天配置awstats，awstats创建出的文件目录在/home/awstats下，在nginx中加入配置后狂报404，发现还是忽略了root和alias的区别，特将修改配置记录如下：
+
+1.失败：server {
+        server_name  test.com;
+        charset utf-8,GB2312;
+        index  index.html;
+ 
+        location / {
+        root html;
+        access_log logs/access.log main;
+         }
+        location ~ ^/awstats/ {
+        root  /home/awstats/;
+        index  index.html;
+        access_log off;
+        error_log off;
+        charset gb2312;
+        }
+ 
+2.失败: server {
+        server_name  test.com;
+        charset utf-8,GB2312;
+        index  index.html;
+ 
+        location / {
+        root html;
+        access_log logs/access.log main;
+         }
+        location ~ ^/awstats/ {
+        alias  /home/;
+        index  index.html;
+        access_log off;
+        error_log off;
+        charset gb2312;
+        }
+ 
+ 
+3.成功: server {
+        server_name  test.com;
+        charset utf-8,GB2312;
+        index  index.html;
+ 
+        location / {
+        root html;
+        access_log logs/access.log main;
+         }
+        location ~ ^/awstats/ {
+        alias  /home/awstats/;
+        index  index.html;
+        access_log off;
+        error_log off;
+        charset gb2312;
+        }
+ 
+4.成功: server {
+        server_name  test.com;
+        charset utf-8,GB2312;
+        index  index.html;
+ 
+        location / {
+        root html;
+        access_log logs/access.log main;
+         }
+        location ~ ^/awstats/ {
+        root  /home/;
+        index  index.html;
+        access_log off;
+        error_log off;
+        charset gb2312;
+        }
+ 
+从以上例子很明显看出，还是对root和alias的概念搞混了~
+1.      location ~ ^/awstats/ {
+        root  /home/awstats/;
+访问：http://test.com/awstats/ 实际访问的是/home/awstats/awstats/
+ 
+2.      location ~ ^/awstats/ {
+        alias  /home/
+访问：http://test.com/awstats/ 实际访问的是/home/
+ 
+3.      location ~ ^/awstats/ {                        #使用alias时目录名后面一定要加“/”
+        alias  /home/awstats/;
+访问：http://test.com/awstats/ 实际访问的是/home/awstats/
+ 
+4.      location ~ ^/awstats/ {
+        root  /home/;
+访问：http://test.com/awstats/ 实际访问的是/home/awstats/
+借用ayou老师的一句话：
+一般情况下，在location /中配置root，在location /other中配置alias是一个好习惯
+
+
+
+====================================================================
+
+
+
+
+
+我的需求是这样的，系统有一个专门的文件夹用于存放图片，css，js或者附件，如：
+
+http://www.test.com/resources/images/a.jpg
+
+http://www.test.com/resources/css/a.css
+
+http://www.test.com/resources/js/a.js
+
+http://www.test.com/resources/attach/a.doc
+
+这样的配置对于apache来说那相当容易，
+
+需要通过location uri规则匹配访问到该文件夹，我使用如下配置：
+
+location ^~ /resources/ {
+    root d:/www/;
+}
+
+试了N多次都能访问不到，一直报404，无比杯具！最后拜读了上面提供的blog才解决，发现跟原博主一样，没有真正搞清楚，location中root和alias的区别，最后修改成：
+
+location ^~ /resources/ {
+    alias d:/www/;
+}
+
+成功实现了我的需求。
+
+原贴如下：
+
+
+niginx 似乎没有虚拟目录的说法，但是可以指定请求路径时nginx访问的路径，也算是一个解决办法。
+
+server {
+listen       80 default;
+server_name  _;
+
+location / {
+root   html;
+index  403.html;
+}
+
+location ~ //.ht {
+deny  all;
+}
+
+    location /phpadmin/ {
+alias   /opt/www/phpadmin/;
+index   index.php;
+}
+location ~ /.php$ {
+include httpd.conf;
+}
+}
+
+要注意的是， location /phpadmin/ {} 和 location /phpadmin {} 是完全不同的。
+
+前者可以访问到目录，而后者将被重定向到服务器，如: http://127.0.0.1/phpadmin ，将被重定向到 http://_/phpadmin
+
+下面这个配置和上面基本类似，唯一的不同是，所有对 /phpadmin/的访问将正确解析，而其他访问则返回页面不存在(404)的信息。
+
+server {
+listen       80 default;
+server_name  _;
+
+location / {
+root   html;
+#index  403.html;
+
+return 404;
+}
+
+location ~ //.ht {
+deny  all;
+}
+
+    location /phpadmin/ {
+alias   /opt/www/phpadmin/;
+index   index.php;
+}
+location ~ /.php$ {
+include httpd.conf;
+}
+}
