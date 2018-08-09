@@ -1,5 +1,5 @@
 进入网站监测域名：http://tool.chinaz.com/dns?type=1&host=github.global.ssl.fastly.net&ip=
-
+https://blog.minhow.com/2017/03/19/tool/git-slow-solve/
 搜索：github.global.ssl.fastly.net
 
 找到TITL最低的：ip
