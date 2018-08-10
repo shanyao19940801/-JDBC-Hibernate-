@@ -1,0 +1,5 @@
+[root@localhost bin]# whereis redis-cli
+redis-cli: /usr/bin/redis-cli
+
+[root@localhost bin]# whereis redis-server
+redis-server: /usr/bin/redis-server
