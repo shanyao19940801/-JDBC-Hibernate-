@@ -1,6 +1,8 @@
-@echo off & setlocal EnableDelayedExpansion
-for /f "delims=" %%i in ('"dir /a/s/b/on *.*"') do (
-set file=%%~fi
-set file=!file:/=/!
-echo !file! >> path.txt
+rem 当前路径相对路径
+@echo off
+setlocal enabledelayedexpansion
+for /r %%i in (*.*) do (
+set s=%%i
+set s=!s:%~dp0=!
+echo !s!>> filename.txt
 )
