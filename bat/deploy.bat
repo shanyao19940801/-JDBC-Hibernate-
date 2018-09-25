@@ -2,9 +2,9 @@
 rem 部署目录
 set SRC=E:\test\ROOT
 rem 备份目录
-set BAK=E:\test\bak
+set BAK=E:\test\bak\20180925
 rem 发布包所在目录
-set DEPLOY=E:\Study\gitother\other-everything\bat\bushu
+set DEPLOY=E:\test\deploy
 
 rem 开始创建文件夹
 for /r %%a in (*) do (
