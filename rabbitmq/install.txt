@@ -1,0 +1,43 @@
+https://blog.csdn.net/hao134838/article/details/71512557
+
+1：安装erlang
+rpm -Uvh http://www.rabbitmq.com/releases/erlang/erlang-19.0.4-1.el7.centos.x86_64.rpm
+
+2.安装rabbitmq
+rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
+
+第七步、安装命令维护插件
+
+  rabbitmq-plugins enable rabbitmq_management 
+
+第八步、设置配置文件，并开启用户远程访问
+
+ #cd /etc/rabbitmq
+ #cp /usr/share/doc/rabbitmq-server-3.6.15/rabbitmq.config.example /etc/rabbitmq/
+ 
+ #mv rabbitmq.config.example rabbitmq.config
+ 
+ 
+另外一个参考地址：
+https://www.linuxidc.com/Linux/2018-08/153363.htm
+
+
+5.新增个人账号,用于远程登录
+
+    1.创建账号
+
+        rabbitmqctl add_user agan 123456
+
+    2.设置用户角色
+
+        rabbitmqctl set_user_tags heming administrator
+
+    3.设置用户权限
+
+        rabbitmqctl set_permissions -p "/" agan ".*" ".*" ".*"
+
+    4.设置完成后可以查看当前用户和角色(需要开启服务)
+
+        rabbitmqctl list_users
+
+    5.完成后在自己的浏览器输入 serverip:15672  其中serverip 是rabbitmq-server所在主机的ip
