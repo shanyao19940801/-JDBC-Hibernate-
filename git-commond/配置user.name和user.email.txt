@@ -1,0 +1,2 @@
+ git config user.name shanyao
+ git config user.email sqshanyao@163.com
