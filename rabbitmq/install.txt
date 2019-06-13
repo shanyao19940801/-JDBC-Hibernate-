@@ -40,4 +40,5 @@ https://www.linuxidc.com/Linux/2018-08/153363.htm
 
         rabbitmqctl list_users
 
+在线管理界面：
     5.完成后在自己的浏览器输入 serverip:15672  其中serverip 是rabbitmq-server所在主机的ip
